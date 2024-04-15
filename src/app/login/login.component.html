@@ -1,0 +1,28 @@
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-md-4 offset-md-4 text-center">
+        <h2 class="text-center mb-4">Iniciar sesión</h2>
+        <form [formGroup]="formLogin" id="formulario-login" (ngSubmit)="loginUsuario()">
+          <div class="mb-3">
+            <mat-form-field class="input-alargado">
+                <mat-label>Ingresa un email</mat-label>
+                <input matInput
+                       placeholder="pat@example.com"
+                       formControlName="email">
+            </mat-form-field>
+          </div>
+          <div class="mb-3">
+            <mat-form-field class="input-alargado">
+                <mat-label>Ingresa una contraseña</mat-label>
+                <input matInput
+                       type="password"
+                       placeholder="*****"
+                       formControlName="contraseina"
+                       >
+            </mat-form-field>
+          </div>
+          <button mat-raised-button type="submit" class="btn btn-primary"  [disabled]="email.invalid || contraseina.invalid">Iniciar sesión</button>
+        </form>
+      </div>
+    </div>
+  </div>

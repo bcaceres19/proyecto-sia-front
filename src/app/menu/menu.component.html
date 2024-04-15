@@ -1,0 +1,38 @@
+<mat-sidenav-container>
+    <mat-sidenav [(opened)]="abrir">
+      <div class="contenedor">
+        <div class="itemEspacio">
+        </div>
+        <div class="imagen">
+          <img src="../../assets/imagenes/acceso-sidenav.png" alt="acceso" class="imgAcceso">
+        </div>
+        <div class="inicio">
+          <a mat-button routerLink="inicio">Inicio</a>
+        </div>
+        <div class="inicio">
+          <a mat-button routerLink="inicio">Carrito</a>
+        </div>
+        <div class="inicio">
+          <a mat-button routerLink="inicio">Pedidos</a>
+        </div>
+        <div class="inicio">
+          <a mat-button routerLink="inicio">Facturación</a>
+        </div>
+        <div class="salir">
+          <a mat-button (click)="onSalir()">Salir</a>
+        </div>
+      </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div class="contenedorHijo">
+        <div class="parteUno">
+          <button mat-icon-button (click)="cambiarEstado()">
+            <mat-icon class="menu">menu</mat-icon>
+          </button>
+        </div>
+        <div class="parteDos">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>

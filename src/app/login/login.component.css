@@ -1,0 +1,14 @@
+.container {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  mat-input {
+    width: 100%; /* Ajusta el ancho según tus necesidades */
+  }
+
+  .input-alargado {
+    width: 100%; /* Ajusta el ancho según tus necesidades */
+  }
