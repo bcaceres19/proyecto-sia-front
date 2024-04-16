@@ -12,7 +12,6 @@ export class ProductoService {
   constructor(private http:HttpClient) { }
 
   public productosActuales():Observable<RespuestaGeneral> {
-
       return this.http.get<RespuestaGeneral>(
         `${Constantes.BASE_URL}${Constantes.PRODUCTO}${Constantes.CONSULTAR}`
       )

@@ -1,7 +1,13 @@
 <div class="container">
-    <div class="row">
-        <div class="col">
-            
+    <div class="row d-flex flex-wrap ">
+        <div class="col-md-4 mb-3 " *ngFor="let producto of productos">
+            <app-vista-tarjeta 
+            [titulo]="producto.nombreProducto?.toString()" 
+            [urlImagen]="producto.imagenProducto?.toString()"
+            [precio]="producto.precioProducto?.toString()"
+            [estado]="producto.estadoProducto"
+            [fechaVencimiento]="producto.fechaVencimientoProducto?.toString()"
+            ></app-vista-tarjeta>
         </div>
     </div>
 </div>

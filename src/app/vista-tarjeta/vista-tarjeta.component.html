@@ -1,6 +1,13 @@
-<div class="card" style="width: 18rem;">
-    <img [src]="urlImagen" class="card-img-top" alt="">
-    <div class="card-body">
-      <p class="card-text">{{descripcionTarjet}}</p>
+<div class="card text-center " style="width: 18rem;">
+    <img [src]="urlImagen" class="card-img-top img-fluid" alt="" *ngIf="urlImagen !== null" >
+    <div class="card-body" >
+      <h2 class="card-title">{{titulo}}</h2>
+      <p  class="card-text" *ngIf="precio"><b>Precio:</b> {{precio}}</p>
+      <p class="card-text" *ngIf="estado"><b>Estado:</b> {{estado}}</p>
+      <p class="card-text" *ngIf="fechaInicio"><b>Fecha Inicio:</b> {{fechaInicio}}</p>
+      <p class="card-text" *ngIf="fechaVencimiento"><b>Fecha Vencimiento:</b> {{fechaVencimiento}}</p>
+      <p class="card-text" *ngIf="cantidadProductos"><b>Cantidad Comprado:</b> {{cantidadProductos}}</p>
+      <p class="card-text" *ngIf="valorTotal"><b>Valor Total:</b> {{valorTotal}}</p>
+      <button mat-flat-button color="primary">Añadir</button>
     </div>
 </div>

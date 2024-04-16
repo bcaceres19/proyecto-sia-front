@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { UsuarioService } from '../service/usuario.service';
-import { UsuarioDto } from '../interface/usuariodto.interface';
+import { Usuario } from '../interface/usuario.interface';
 import { Router } from '@angular/router';
 
 @Component({
@@ -36,7 +36,7 @@ export class LoginComponent {
     if(this.email.invalid){
       this.generarAlerta()
     }else{
-      let dataUsuario: UsuarioDto = {
+      let dataUsuario: Usuario = {
         email: this.email.value,
         contraseina: this.contraseina.value
       }

@@ -20,6 +20,10 @@ import {ReactiveFormsModule, FormsModule} from "@angular/forms";
 import {HttpClientModule} from '@angular/common/http';
 import { AdministracionComponent } from './administracion/administracion.component';
 import { VistaTarjetaComponent } from './vista-tarjeta/vista-tarjeta.component'
+import {MatCardModule} from '@angular/material/card';
+import { CarritoComponent } from './carrito/carrito.component';
+import {MatTableModule} from '@angular/material/table';
+import { PedidoComponent } from './pedido/pedido.component';
 
 
 @NgModule({
@@ -29,7 +33,9 @@ import { VistaTarjetaComponent } from './vista-tarjeta/vista-tarjeta.component'
     PageNotFoundComponent,
     MenuComponent,
     AdministracionComponent,
-    VistaTarjetaComponent
+    VistaTarjetaComponent,
+    CarritoComponent,
+    PedidoComponent
   ],
   imports: [
     BrowserModule,
@@ -41,12 +47,14 @@ import { VistaTarjetaComponent } from './vista-tarjeta/vista-tarjeta.component'
     MatToolbarModule,
     MatIconModule,
     MatInputModule,
+    MatCardModule,
     ScrollingModule,
     MatOptionModule,
     MatSelectModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
