@@ -2,16 +2,18 @@ import { Inventario } from "./inventario.interface";
 
 export interface Producto {
 
-    codigoProducto:string;
+    codigoProducto?:string;
 
-    precioProducto:number;
+    precioProducto?:number;
 
-    fechaVencimientoProducto:string;
+    fechaVencimientoProducto?:string;
 
-    estadoProducto:string;
+    estadoProducto?:string;
 
-    posicionInsercion:number;
+    posicionInsercion?:number;
 
-    idInventarioFk:Inventario;
+    idInventarioFk?:Inventario;
+
+    idUsuarioInsercion?:number;
 
 }

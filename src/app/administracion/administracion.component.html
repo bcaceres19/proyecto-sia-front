@@ -1,4 +1,15 @@
 <div class="container">
+    <div class="row d-flex flex-wrap text-center">
+        <div class="col mb-3" role="group" aria-label="Grupo de botones verticales">
+          <button  mat-raised-button color="primary" (click)="organizarData('INORDEN')">Inorden</button>
+        </div>
+        <div class="col"> 
+            <button mat-raised-button color="accent" (click)="organizarData('PRE_ORDEN')">Preorden</button>
+        </div>
+        <div class="col">
+            <button mat-raised-button color="warn" (click)="organizarData('POST_ORDEN')">Postorden</button>
+        </div>
+    </div>
     <div class="row d-flex flex-wrap ">
         <div class="col-md-4 mb-3 " *ngFor="let producto of productos">
             <app-vista-tarjeta 
@@ -7,6 +18,10 @@
             [precio]="producto.precioProducto?.toString()"
             [estado]="producto.estadoProducto"
             [fechaVencimiento]="producto.fechaVencimientoProducto?.toString()"
+            [textoBoton]="'Añadir'"
+            [duoBotones]="false"
+            (newItemEven)="registrarProductoVenta($event)"
+            [codigoProducto]="producto.codigoProducto"
             ></app-vista-tarjeta>
         </div>
     </div>

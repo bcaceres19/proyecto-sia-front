@@ -24,6 +24,7 @@ import {MatCardModule} from '@angular/material/card';
 import { CarritoComponent } from './carrito/carrito.component';
 import {MatTableModule} from '@angular/material/table';
 import { PedidoComponent } from './pedido/pedido.component';
+import { FacturacionComponent } from './facturacion/facturacion.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { PedidoComponent } from './pedido/pedido.component';
     AdministracionComponent,
     VistaTarjetaComponent,
     CarritoComponent,
-    PedidoComponent
+    PedidoComponent,
+    FacturacionComponent
   ],
   imports: [
     BrowserModule,

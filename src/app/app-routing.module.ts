@@ -6,6 +6,7 @@ import { MenuComponent } from './menu/menu.component';
 import { AdministracionComponent } from './administracion/administracion.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { PedidoComponent } from './pedido/pedido.component';
+import { FacturacionComponent } from './facturacion/facturacion.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
       {
         path: 'pedido',
         component: PedidoComponent
+      },
+      {
+        path: 'facturacion',
+        component: FacturacionComponent
       }
     ]
   },

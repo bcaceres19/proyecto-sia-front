@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Constantes } from '../shared/constanstes';
 import { Usuario } from '../interface/usuario.interface';
+import { RespuestaGeneral } from '../interface/respuestaGeneral.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,9 @@ export class UsuarioService {
 
   constructor(private http:HttpClient) { }
 
-  public serviceLogin(dataUsuario:Usuario):Observable<boolean> {
+  public serviceLogin(dataUsuario:Usuario):Observable<RespuestaGeneral> {
 
-    return this.http.post<boolean>(
+    return this.http.post<RespuestaGeneral>(
       `${Constantes.BASE_URL}${Constantes.USUARIO}${Constantes.LOGIN}`, dataUsuario);
   }
 

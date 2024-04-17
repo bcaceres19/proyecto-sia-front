@@ -1,34 +1,34 @@
 <div class="container">
   <div class="row d-flex justify-content-between text-center">
     <div class="col-6">
-      <h2>Precio Total: {{ productosVenta.venta.precioTotalVenta }}</h2>
+      <h2>Precio Total: {{ precioTotalVenta }}</h2>
     </div>
     <div class="col-6">
-      <h2>Cantidad Venta: {{ productosVenta.venta.cantidadVenta }}</h2>
+      <h2>Cantidad Venta: {{cantidadVenta }}</h2>
     </div>
   </div>
 
   <div class="row">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <ng-container matColumnDef="codigo">
-        <th mat-header-cell *matHeaderCellDef> Codigo </th>
-        <td mat-cell *matCellDef="let element"> {{ element.codigoProducto }} </td>
+        <th mat-header-cell *matHeaderCellDef class="text-center"> Codigo </th>
+        <td mat-cell *matCellDef="let element" class="text-center"> {{ element.codigoProducto }} </td>
       </ng-container>
 
       <ng-container matColumnDef="precio">
-        <th mat-header-cell *matHeaderCellDef> Precio </th>
-        <td mat-cell *matCellDef="let element"> {{ element.precioProducto }} </td>
+        <th mat-header-cell *matHeaderCellDef class="text-center"> Precio </th>
+        <td mat-cell *matCellDef="let element" class="text-center"> {{ element.precioProducto }} </td>
       </ng-container>
 
       <ng-container matColumnDef="estado">
-        <th mat-header-cell *matHeaderCellDef> Estado </th>
-        <td mat-cell *matCellDef="let element"> {{ element.estadoProducto }} </td>
+        <th mat-header-cell *matHeaderCellDef class="text-center"> Estado </th>
+        <td mat-cell *matCellDef="let element" class="text-center"> {{ element.estadoProducto }} </td>
       </ng-container>
 
       <ng-container matColumnDef="acciones">
-        <th mat-header-cell *matHeaderCellDef> Acciones </th>
-        <td mat-cell *matCellDef="let element">
-          <button mat-raised-button color="warn">Eliminar</button>
+        <th mat-header-cell *matHeaderCellDef class="text-center"> Acciones </th>
+        <td mat-cell *matCellDef="let element" class="text-center">
+          <button mat-raised-button color="warn" (click)="eliminarProductoCarrito(element.posicionInsercion)">Eliminar</button>
         </td>
       </ng-container>
 
@@ -38,6 +38,6 @@
   </div>
 
   <div class="row d-flex justify-content-center">
-    <button mat-raised-button color="primary">Comprar</button>
+    <button mat-raised-button color="primary" (click)="realizarVentaConfirmado()">Comprar</button>
   </div>
 </div>

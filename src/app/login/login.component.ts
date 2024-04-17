@@ -43,11 +43,12 @@ export class LoginComponent {
       this.usuarioService.serviceLogin(dataUsuario).subscribe(
         {
           next:(v) => {
-            if(v){
+            if(v.status){
+              let usuario:Usuario = v.data as Usuario;
+              sessionStorage.setItem("id",  usuario.idUsuario!.toString());
               this.router.navigate(["administrador"])
             }else{
               this.generarAlerta()
-
             }
           },
           error:(e) => console.error(e),
