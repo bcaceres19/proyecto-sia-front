@@ -25,6 +25,7 @@ export class MenuComponent {
   }
 
     onSalir(){
+      sessionStorage.clear()
       this.route.navigate([""]);
     }
 }

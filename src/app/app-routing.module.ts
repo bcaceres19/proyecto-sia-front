@@ -7,6 +7,7 @@ import { AdministracionComponent } from './administracion/administracion.compone
 import { CarritoComponent } from './carrito/carrito.component';
 import { PedidoComponent } from './pedido/pedido.component';
 import { FacturacionComponent } from './facturacion/facturacion.component';
+import { permisosGuard } from './permisos.guard';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
   {
     path:'administrador',
     component: MenuComponent,
+    canActivate: [permisosGuard],
     children: [
       {
         path: '',

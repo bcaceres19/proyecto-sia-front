@@ -60,7 +60,6 @@ export class PedidoComponent implements OnInit {
   }
 
   public rechazarPedido(codigoPedido:string){
-    console.error(codigoPedido)
     let pedido:Pedido = {
       codigoPedido:codigoPedido
     }
