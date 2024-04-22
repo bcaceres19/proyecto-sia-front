@@ -1,0 +1,21 @@
+<div class="card text-center border border-2" style="width: 18rem;">
+    <img [src]="urlImagen" class="card-img-top" style="height: 13rem;" alt="" *ngIf="urlImagen !== null" >
+    <div class="card-body">
+      <h2 class="card-title fs-3 text-center">{{titulo}}</h2>
+      <p  class="card-text fs-6" *ngIf="precio"><b>Precio:</b> {{precio}}$</p>
+      <p class="card-text fs-6" *ngIf="estado"><b>Estado:</b> {{estado}} </p>
+      <p class="card-text fs-6" *ngIf="fechaInicio"><b>Fecha Inicio:</b> {{fechaInicio}}</p>
+      <p class="card-text fs-6" *ngIf="fechaVencimiento"><b>Fecha Vencimiento:</b> {{fechaVencimiento}}</p>
+      <p class="card-text fs-6" *ngIf="cantidadProductos"><b>Cantidad Comprado:</b> {{cantidadProductos}}</p>
+      <p class="card-text fs-6" *ngIf="valorTotal"><b>Valor Total:</b> {{valorTotal}}</p>
+      <div class="card-body d-flex justify-content-between" *ngIf="duoBotones">
+        <button mat-flat-button color="primary" 
+        (click)="emitirValores()">{{textoBotonUno}}</button>
+        <button mat-flat-button color="warn" 
+        (click)="emitirModal()"
+        >{{textoBotonDos}}</button>
+      </div>
+      <button mat-flat-button color="primary"  *ngIf="!duoBotones" (click)="emitirValores()">{{textoBotonUno}}</button>
+    </div>
+</div>
+

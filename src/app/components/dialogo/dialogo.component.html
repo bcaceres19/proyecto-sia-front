@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row d-flex flex-wrap text-center">
+        <h1 mat-dialog-title>{{data.titulo}}</h1>
+        <div mat-dialog-content>
+        <table mat-table [dataSource]="data.productos" class="mat-elevation-z8">
+            <ng-container matColumnDef="codigoProducto">
+                <th mat-header-cell *matHeaderCellDef class="text-center"> Codigo </th>
+                <td mat-cell *matCellDef="let element" class="text-center"> {{ element.codigoProducto?.toString() }} </td>
+            </ng-container>
+            <ng-container matColumnDef="fechaVencimiento">
+                <th mat-header-cell *matHeaderCellDef class="text-center"> Fecha Vencimiento </th>
+                <td mat-cell *matCellDef="let element" class="text-center"> {{ element.fechaVencimiento?.toString() }} </td>
+            </ng-container>
+            <ng-container matColumnDef="tipoProducto">
+                <th mat-header-cell *matHeaderCellDef class="text-center"> Tipo Producto </th>
+                <td mat-cell *matCellDef="let element" class="text-center"> {{  element.tipoProducto }} </td>
+            </ng-container>
+            <ng-container matColumnDef="estadoProducto">
+                <th mat-header-cell *matHeaderCellDef class="text-center"> Estado Producto </th>
+                <td mat-cell *matCellDef="let element" class="text-center"> {{  element.estadoProducto }} </td>
+            </ng-container>
+            <ng-container matColumnDef="precio">
+                <th mat-header-cell *matHeaderCellDef class="text-center"> Precio </th>
+                <td mat-cell *matCellDef="let element" class="text-center"> {{  element.precioProducto?.toString() }}$ </td>
+            </ng-container>
+            <ng-container matColumnDef="acciones">
+                <th mat-header-cell *matHeaderCellDef class="text-center"> Acciones </th>
+                <td mat-cell *matCellDef="let element" class="text-center">
+                  <button mat-raised-button color="primary" (click)="addCodigoProductos(element.codigoProducto?.toString())">Añadir</button>
+                </td>
+              </ng-container>
+            <tr mat-header-row *matHeaderRowDef="data.nombreColumnas"></tr>
+            <tr mat-row *matRowDef="let row; columns: data.nombreColumnas;"></tr>
+        </table>
+        </div>
+        <div mat-dialog-actions class="d-flex justify-content-center">
+            <button mat-flat-button color="warn"  [mat-dialog-close]="codigoProductos">Cerrar</button>
+        </div>
+    </div>
+</div>

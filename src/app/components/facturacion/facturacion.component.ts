@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Facturacion } from '../interface/facturacion.interface';
-import { PedidoService } from '../service/pedido.service';
+import { Facturacion } from '../../interface/facturacion.interface';
+import { PedidoService } from '../../service/pedido.service';
 
 @Component({
   selector: 'app-facturacion',

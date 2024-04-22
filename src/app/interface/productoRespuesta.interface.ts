@@ -1,15 +1,10 @@
-export interface ProductoInterface{
+export interface ProductoRespuesta{
 
-    codigoProducto?:string;
-
-    estadoProducto?:string;
-
-    precioProducto?:number;
-
-    fechaVencimientoProducto?:Date;
-
-    nombreProducto?:string;
-
-    imagenProducto?:string;
+    indice:number;
+    codigoProducto:string;
+    fechaVencimiento:string;
+    tipoProducto:string;
+    precioProducto:number;
+    estadoProducto:string;
 
 }

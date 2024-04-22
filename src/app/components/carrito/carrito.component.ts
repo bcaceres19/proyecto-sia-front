@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { VentaProductoRespuesta } from '../interface/ventaProductoRespuesta.interface';
+import { VentaProductoRespuesta } from '../../interface/ventaProductoRespuesta.interface';
 import { MatTableDataSource } from '@angular/material/table';
-import { Producto } from '../interface/producto.interface';
-import { VentaService } from '../service/venta.service';
+import { Producto } from '../../interface/producto.interface';
+import { VentaService } from '../../service/venta.service';
 import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
-import { Venta } from '../interface/venta.interface';
+import { Venta } from '../../interface/venta.interface';
 
 @Component({
   selector: 'app-carrito',

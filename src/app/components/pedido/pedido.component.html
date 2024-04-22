@@ -8,10 +8,11 @@
             [cantidadProductos]="pedido.cantidadProductosVenta"
             [valorTotal]="pedido.valorTotal"
             [duoBotones]="true"
-            [textoBoton]="'Confirmar'"
+            [textoBotonUno]="'Confirmar'"
             [textoBotonDos]="'Rechazar'"
-            (codigoProdRechazar)="rechazarPedido($event)"
-            (newItemEven)="aceptarPedido($event)"
+            [tipoEnvio]="'codigoProducto'"
+            (itemNuevo)="rechazarPedido($event)"
+            (itemNuevo)="aceptarPedido($event)"
             ></app-vista-tarjeta>
         </div>
         <cdk-virtual-scroll-viewport class="col-md-8 mb-3" [itemSize]="pedido.productos.length">

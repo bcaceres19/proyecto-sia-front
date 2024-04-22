@@ -1,0 +1,63 @@
+<div class="container">
+    <form [formGroup]="formCrearUsuario" id="formulario-login">
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="mb-3">
+                    <mat-label for="nombres">Nombres</mat-label>
+                    <input matInput formControlName="nombres" required>
+                </mat-form-field>
+            </div>
+            <div class="col">      
+                <div class="mb-3">
+                    <label for="apellidos">Apellidos</label>
+                    <input type="text" id="apellidos" class="form-control" formControlName="apellidos" required>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col">
+                <div class="mb-3">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" id="telefono" class="form-control" formControlName="telefono" required>
+                </div>
+            </div>
+            <div class="col">
+                <div class="mb-3">
+                    <label for="tiposRoles">Tipos Roles</label>
+                    <select id="tiposRoles" class="form-control" formControlName="tiposRoles" required>
+                        <option value="">Selecciona un rol</option>
+                        <option value="volvo">Volvo</option>
+                        <option value="saab">Saab</option>
+                        <option value="mercedes">Mercedes</option>
+                        <option value="audi">Audi</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col">
+                <div class="mb-3">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-control" formControlName="email" required>
+                </div>
+            </div>
+            <div class="col">
+                <div class="mb-3">
+                    <label for="contrasena">Contraseña</label>
+                    <input type="password" id="contrasena" class="form-control" formControlName="contrasena" required>
+                </div>
+            </div>
+        </div>      
+        <div class="form-group row">    
+            <div class="col">
+                <div class="mb-3">
+                    <label for="repetirContrasena">Repetir Contraseña</label>
+                    <input type="password" id="repetirContrasena" class="form-control" formControlName="repetirContrasena" required>
+                </div>
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-primary" [disabled]="formCrearUsuario.invalid">Registrarse</button>
+            </div>
+        </div>
+    </form>
+</div>

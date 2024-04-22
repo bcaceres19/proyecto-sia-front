@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PedidoService } from '../service/pedido.service';
-import { RespuestaPedido } from '../interface/respuestaPedido.interface';
-import { Pedido } from '../interface/pedido.interface';
+import { PedidoService } from '../../service/pedido.service';
+import { RespuestaPedido } from '../../interface/respuestaPedido.interface';
+import { Pedido } from '../../interface/pedido.interface';
 import { Subscription } from 'rxjs';
 
 @Component({

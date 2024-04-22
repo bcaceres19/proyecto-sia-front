@@ -36,12 +36,12 @@ export class VentaService {
   public serviceEliminarProductoUsuario(codigo:string):Observable<boolean>{
     return this.http.post<boolean>(
       `${Constantes.BASE_URL}${Constantes.VENTA}${Constantes.ELIMINAR_PRODUCTO_VENTA}`,
-      {},
       {
         params:{
           idVentaProducto:codigo
         }
       }
+      
     ).pipe(
       tap(() => {
         this._refresh$.next()

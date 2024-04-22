@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { UsuarioService } from '../service/usuario.service';
-import { Usuario } from '../interface/usuario.interface';
+import { UsuarioService } from '../../service/usuario.service';
+import { Usuario } from '../../interface/usuario.interface';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,9 @@ export class LoginComponent {
     return this.formLogin.get('contraseina') as FormControl
   }
   
-  constructor(private usuarioService:UsuarioService,private router:Router){
+  constructor(private usuarioService:UsuarioService,private router:Router,
+    private spinner:NgxSpinnerService
+  ){
 
   }
 
@@ -40,19 +43,24 @@ export class LoginComponent {
         email: this.email.value,
         contraseina: this.contraseina.value
       }
+      this.spinner.show();
       this.usuarioService.serviceLogin(dataUsuario).subscribe(
         {
           next:(v) => {
             if(v.status){
               let usuario:Usuario = v.data as Usuario;
               sessionStorage.setItem("id",  usuario.idUsuario!.toString());
+              sessionStorage.setItem("rol", usuario.idRolFk!.idRol.toString()) 
               this.router.navigate(["administrador"])
             }else{
               this.generarAlerta()
             }
           },
-          error:(e) => console.error(e),
-          complete:() => console.log("Se completo")          
+          error:(e) => {
+            this.spinner.hide()
+            console.error(e)
+          },
+          complete:() => this.spinner.hide()          
         }
       )
     }

@@ -12,12 +12,13 @@ export class ProductoService {
 
   constructor(private http:HttpClient) { }
 
-  public productosActuales(orden:string):Observable<RespuestaGeneral> {
+  public buscarProductosIdVenta(orden:string,idInventario:number):Observable<RespuestaGeneral> {
       return this.http.get<RespuestaGeneral>(
-        `${Constantes.BASE_URL}${Constantes.PRODUCTO}${Constantes.CONSULTAR}`,
+        `${Constantes.BASE_URL}${Constantes.PRODUCTO}${Constantes.CONSULTAR_PRODUCTOS}`,
         {
           params:{
-            "tipoOrdenamiento": orden
+            "tipoOrdenamiento": orden,
+            "idInventario":idInventario
           }
         }
       )
