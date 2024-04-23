@@ -8,6 +8,7 @@ export class Constantes {
     public static readonly VENTA: string = '/venta';
     public static readonly PEDIDO: string = '/pedido';
     public static readonly INVENTARIO:string = '/inventario';
+    public static readonly LISTAS:string = '/listas';
 
     //Service
     public static readonly LOGIN: string = '/login';
@@ -25,6 +26,10 @@ export class Constantes {
     public static readonly CONSULTAR_INVENTARIO: string = '/consultar-inventario';
     public static readonly CONSULTAR_INVENTARIO_NOMBRE: string = '/consultar-inventario-nombre';
     public static readonly CONSULTAR_PRODUCTOS: string = '/consultar-productos';
+    public static readonly CONSULTAR_ROLES_USUARIO: string = '/consultar-roles-usuario';
+    public static readonly CREAR_USUARIO: string = '/crear';
+    public static readonly CONSULTAR_TIPOS_PRODUCTOS: string = '/consultar-tipos-producto';
+    public static readonly CREAR_INVENTARIO: string = '/crear';
 
 
 }

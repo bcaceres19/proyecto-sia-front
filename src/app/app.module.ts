@@ -32,6 +32,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { CrearUsuarioComponent } from './components/crear-usuario/crear-usuario.component';
 import { CrearProductoInventarioComponent } from './components/crear-producto-inventario/crear-producto-inventario.component';
 import { CrearProductoComponent } from './components/crear-producto/crear-producto.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -71,9 +74,12 @@ import { CrearProductoComponent } from './components/crear-producto/crear-produc
     FormsModule,
     MatProgressSpinnerModule,
     NgxSpinnerModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' }
   ],
   bootstrap: [AppComponent]
 })

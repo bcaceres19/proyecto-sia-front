@@ -1,63 +1,96 @@
-<div class="container">
-    <form [formGroup]="formCrearUsuario" id="formulario-login">
-        <div class="row">
-            <div class="col">
-                <mat-form-field class="mb-3">
-                    <mat-label for="nombres">Nombres</mat-label>
-                    <input matInput formControlName="nombres" required>
-                </mat-form-field>
-            </div>
-            <div class="col">      
-                <div class="mb-3">
-                    <label for="apellidos">Apellidos</label>
-                    <input type="text" id="apellidos" class="form-control" formControlName="apellidos" required>
+<div class="container mt-5">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-8">
+            <h2 class="text-center mb-4">Registro de usuario</h2>
+
+            <form [formGroup]="formCrearUsuario" (ngSubmit)="crearUsuario()">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Nombres</mat-label>
+                                <input matInput formControlName="nombres" placeholder="Nombres" (blur)="actualizarErrorMessage()">
+                                <mat-error *ngIf="nombres.invalid">{{errorNombre}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Apellidos</mat-label>
+                                <input matInput formControlName="apellidos" placeholder="Apellidos" (blur)="actualizarErrorMessage()">
+                                <mat-error *ngIf="apellidos.invalid">{{errorApellido}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
                 </div>
-            </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Teléfono</mat-label>
+                                <input matInput type="text" formControlName="telefono" placeholder="Teléfono" (blur)="actualizarErrorMessage()">
+                                <mat-error *ngIf="telefono.invalid">{{errorTelefono}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill" class="w-100" *ngIf="idRol !== null">
+                                <mat-label>Rol</mat-label>
+                                <mat-select formControlName="rol">
+                                    <mat-option *ngFor="let objeto of roles" [value]="objeto.idRol">{{objeto.nombreRol}}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="rol.invalid">{{errorRol}}</mat-error>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" class="w-100" *ngIf="idRol === null">
+                                <mat-label>Correo electrónico</mat-label>
+                                <input matInput type="email" formControlName="email" placeholder="Correo electrónico" (blur)="actualizarErrorMessage()">
+                                <mat-error *ngIf="email.invalid">{{errorEmail}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center" *ngIf="idRol !== null">
+                    <div class="col-md-6 text-center">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Correo electrónico</mat-label>
+                                <input matInput type="email" formControlName="email" placeholder="Correo electrónico" (blur)="actualizarErrorMessage()">
+                                <mat-error *ngIf="email.invalid">{{errorEmail}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Contraseña</mat-label>
+                                <input matInput type="password" formControlName="contraseina" placeholder="Contraseña" (blur)="actualizarErrorMessage()">
+                                <mat-error *ngIf="contraseina.invalid || contraseinDesiguales">{{errorPassword}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Repetir Contraseña</mat-label>
+                                <input matInput type="password" formControlName="repetirContraseina" placeholder="Repetir Contraseña" (blur)="actualizarErrorMessage()">
+                                <mat-error *ngIf="repetirContraseina.invalid || contraseinDesiguales">{{repeatErrorPassword}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center mt-4">
+                    <div class="col-md-2 text-center">
+                        <button mat-raised-button type="submit" class="btn btn-primary" [disabled]="formCrearUsuario.invalid">Registrarse</button>
+                    </div>
+                    <div class="col-md-2 text-center">
+                        <button mat-raised-button type="button" class="btn btn-secondary" (click)="volver()">Volver</button>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class="form-group row">
-            <div class="col">
-                <div class="mb-3">
-                    <label for="telefono">Teléfono</label>
-                    <input type="tel" id="telefono" class="form-control" formControlName="telefono" required>
-                </div>
-            </div>
-            <div class="col">
-                <div class="mb-3">
-                    <label for="tiposRoles">Tipos Roles</label>
-                    <select id="tiposRoles" class="form-control" formControlName="tiposRoles" required>
-                        <option value="">Selecciona un rol</option>
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="mercedes">Mercedes</option>
-                        <option value="audi">Audi</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col">
-                <div class="mb-3">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" class="form-control" formControlName="email" required>
-                </div>
-            </div>
-            <div class="col">
-                <div class="mb-3">
-                    <label for="contrasena">Contraseña</label>
-                    <input type="password" id="contrasena" class="form-control" formControlName="contrasena" required>
-                </div>
-            </div>
-        </div>      
-        <div class="form-group row">    
-            <div class="col">
-                <div class="mb-3">
-                    <label for="repetirContrasena">Repetir Contraseña</label>
-                    <input type="password" id="repetirContrasena" class="form-control" formControlName="repetirContrasena" required>
-                </div>
-            </div>
-            <div class="col">
-                <button type="submit" class="btn btn-primary" [disabled]="formCrearUsuario.invalid">Registrarse</button>
-            </div>
-        </div>
-    </form>
+    </div>
 </div>

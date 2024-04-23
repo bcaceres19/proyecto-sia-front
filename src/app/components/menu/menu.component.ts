@@ -13,7 +13,10 @@ export class MenuComponent {
 
   redireccion:string = '';
 
+  idRol:string | null;
+
   constructor(private route:Router) {
+    this.idRol = sessionStorage.getItem("rol")
   }
 
   cambiarEstado(){

@@ -6,7 +6,7 @@ export interface Usuario{
 
     nombres?:string;
 
-    apellido?:string;
+    apellidos?:string;
 
     telefono?:string;
 

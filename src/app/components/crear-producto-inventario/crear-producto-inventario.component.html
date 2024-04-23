@@ -1,1 +1,93 @@
-<p>crear-producto-inventario works!</p>
+<div class="container mt-5">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-8">
+            <h2 class="text-center mb-4">Registro de producto</h2>
+
+            <form [formGroup]="formCrearInventario" (ngSubmit)="crearInventario()">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Nombre del producto</mat-label>
+                                <input matInput formControlName="nombreProducto" placeholder="Nombre del producto" (blur)="actualizarErrorMessage()">
+                                <mat-error *ngIf="nombreProducto.invalid">{{errorNombreProducto}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Tipo de producto</mat-label>
+                                <mat-select formControlName="idTipoProducto">
+                                    <mat-option *ngFor="let tipo of tiposProductos" [value]="tipo.idTipoProducto">{{tipo.nombreTipoProducto}}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="idTipoProducto.invalid">{{errorTipoProducto}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Precio del producto</mat-label>
+                                <input matInput type="number" formControlName="precioProducto" placeholder="Precio del producto" (blur)="actualizarErrorMessage()">
+                                <mat-error *ngIf="precioProducto.invalid">{{errorPrecioProducto}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Stock del producto</mat-label>
+                                <input matInput type="number" formControlName="stock" placeholder="Stock del producto" (blur)="actualizarErrorMessage()">
+                                <mat-error *ngIf="stock.invalid">{{errorStock}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Imagen del producto</mat-label>
+                                <input matInput formControlName="urlImagen" placeholder="URL de la imagen" (blur)="actualizarErrorMessage()">
+                                <mat-error *ngIf="urlImagen.invalid">{{errorUrlImagen}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Porcentaje Extra</mat-label>
+                                <input matInput type="number" formControlName="porcentajeAumento" placeholder="Porcentaje" (blur)="actualizarErrorMessage()">
+                                <mat-error *ngIf="porcentajeAumento.invalid">{{errorPorcentaje}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Fecha de vencimiento</mat-label>
+                                <input matInput [matDatepicker]="picker" formControlName="fechaVencimiento" placeholder="Fecha de vencimiento" (blur)="actualizarErrorMessage()">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                                <mat-error *ngIf="fechaVencimiento.invalid">{{errorFechaVencimiento}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center mt-4">
+                    <div class="col-md-2 text-center">
+                        <button mat-raised-button type="submit" class="btn btn-primary" [disabled]="formCrearInventario.invalid">Registrar</button>
+                    </div>
+                    <div class="col-md-2 text-center">
+                        <button mat-raised-button type="button" class="btn btn-secondary" (click)="volver()">Volver</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

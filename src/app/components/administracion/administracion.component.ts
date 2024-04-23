@@ -144,7 +144,10 @@ export class AdministracionComponent implements OnInit{
             this.productos = v.listaData as ProductoRespuesta[];
           }
         },
-        error:(e) => console.error(e),
+        error:(e) => {
+          console.error(e)
+          this.spinner.hide()
+          },
         complete:() => {
           const dialogoRef = this.matDialog.open(DialogoComponent, {
             data:{
@@ -160,12 +163,14 @@ export class AdministracionComponent implements OnInit{
               titulo:"Otros Precios"
             }
           })
+          this.spinner.hide()
           dialogoRef.afterClosed().subscribe(res => {
+            this.spinner.show()
             for(const codigo of res){
               this.registrarProductoVenta(codigo);
             }
+            this.spinner.hide()
           });
-          this.spinner.hide()
         }
       }
     )

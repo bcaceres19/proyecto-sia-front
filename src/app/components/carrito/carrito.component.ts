@@ -6,6 +6,7 @@ import { VentaService } from '../../service/venta.service';
 import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
 import { Venta } from '../../interface/venta.interface';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-carrito',
@@ -34,11 +35,13 @@ export class CarritoComponent implements OnInit {
       })
     }
 
-    constructor(private inventarioService:VentaService){
+    constructor(private inventarioService:VentaService, private spinner: NgxSpinnerService){
     }
 
     public consultarProductosVenta(){
-      let idUsuario:number = Number.parseInt(sessionStorage.getItem("id")!.toString()) 
+      
+      let idUsuario:number = Number.parseInt(sessionStorage.getItem("id")!.toString());
+      this.spinner.show()
       this.inventarioService.serviceVentaUsuario(idUsuario).subscribe(
         {
           next:(v) => {
@@ -54,14 +57,19 @@ export class CarritoComponent implements OnInit {
               this.dataSource = new MatTableDataSource<Producto>(this.productosVenta.productos);
             }
           },
-          error:(e) => console.error(e),
-          complete:() => console.log("Se completo")          
+          error:(e) => {
+            console.error(e)
+            this.spinner.hide()
+          },
+          complete:() => this.spinner.hide()
+          
         }
       )
 
     }
 
     public realizarVentaConfirmado(){
+      this.spinner.show()
       this.inventarioService.serviceRealizarVentaConfirmada(this.productosVenta.venta).subscribe(
         {
           next:(v) => {
@@ -76,22 +84,25 @@ export class CarritoComponent implements OnInit {
             this.dataSource = new MatTableDataSource
           },
           error:(e) => {
+            this.spinner.hide()
             Swal.fire({
               text:"No se pudo realizar la compra, comunicate con el administrador",
               icon: "error"
             })
+            console.error(e)
           },
-          complete:() => console.log("Se completo")          
+          complete:() => this.spinner.hide()          
         }
       )
     }
 
-    public eliminarProductoCarrito(codigoProducto:string){
-      
-      this.inventarioService.serviceEliminarProductoUsuario(codigoProducto).subscribe(
+    public eliminarProductoCarrito(idVentaProducto:number){
+      this.spinner.show()
+      this.inventarioService.serviceEliminarProductoUsuario(idVentaProducto).subscribe(
         {
           next:(v) => {
             if(!v){
+              this.spinner.hide()
               Swal.fire({
                 text:"No se pudo eliminar el producto de la venta, comunicate con el administrador",
                 icon: "error"
@@ -99,12 +110,13 @@ export class CarritoComponent implements OnInit {
             }
           },
           error:(e) => {
+            this.spinner.hide()
             Swal.fire({
               text:"No se pudo eliminar el producto de la venta, comunicate con el administrador",
               icon: "error"
             })
           },
-          complete:() => console.log("Se completo")          
+          complete:() => this.spinner.hide()          
         }
       )
     }

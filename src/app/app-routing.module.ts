@@ -9,6 +9,7 @@ import { PedidoComponent } from './components/pedido/pedido.component';
 import { FacturacionComponent } from './components/facturacion/facturacion.component';
 import { permisosGuard } from './permisos.guard';
 import { CrearUsuarioComponent } from './components/crear-usuario/crear-usuario.component';
+import { CrearProductoInventarioComponent } from './components/crear-producto-inventario/crear-producto-inventario.component';
 
 const routes: Routes = [
   {
@@ -16,7 +17,7 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'crearUsuario',
+    path: 'registro',
     component: CrearUsuarioComponent
   },
   {
@@ -27,6 +28,14 @@ const routes: Routes = [
       {
         path: '',
         component: AdministracionComponent
+      },
+      {
+        path: 'registro-usuario',
+        component: CrearUsuarioComponent
+      },
+      {
+        path: 'registro-inventario',
+        component: CrearProductoInventarioComponent
       },
       {
         path: 'carrito',

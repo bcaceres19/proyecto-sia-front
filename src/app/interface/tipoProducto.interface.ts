@@ -1,5 +1,5 @@
 export interface TipoProducto{
-    idTipoProducto:number;
-    nombreTipoProducto:string;
-    estadoProducto:string;
+    idTipoProducto?:number;
+    nombreTipoProducto?:string;
+    estadoProducto?:string;
 }

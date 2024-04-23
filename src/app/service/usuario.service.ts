@@ -18,4 +18,10 @@ export class UsuarioService {
       `${Constantes.BASE_URL}${Constantes.USUARIO}${Constantes.LOGIN}`, dataUsuario);
   }
 
+  public crearUsuario(dataUsuario:Usuario): Observable<RespuestaGeneral>{
+    return this.http.post<RespuestaGeneral>(
+      `${Constantes.BASE_URL}${Constantes.USUARIO}${Constantes.CREAR_USUARIO}`, dataUsuario
+    )
+  }
+
 }

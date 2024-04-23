@@ -50,7 +50,7 @@ export class LoginComponent {
             if(v.status){
               let usuario:Usuario = v.data as Usuario;
               sessionStorage.setItem("id",  usuario.idUsuario!.toString());
-              sessionStorage.setItem("rol", usuario.idRolFk!.idRol.toString()) 
+              sessionStorage.setItem("rol", usuario.idRolFk!.idRol!.toString()) 
               this.router.navigate(["administrador"])
             }else{
               this.generarAlerta()

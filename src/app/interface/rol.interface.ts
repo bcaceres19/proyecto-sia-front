@@ -1,9 +1,9 @@
 export interface Rol{
 
-    idRol:number;
+    idRol?:number;
 
-    nombreRol:string;
+    nombreRol?:string;
 
-    estadoRol:string;
+    estadoRol?:string;
 
 }

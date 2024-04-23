@@ -1,15 +1,19 @@
 import { TipoProducto } from "./tipoProducto.interface";
 
 export interface Inventario{
-    idInventario:number;
+    idInventario?:number;
 
-    precioProductoInventario:number;
+    precioProductoInventario?:number;
 
-    stockProductoInventario:number;
+    stockProductoInventario?:number;
 
-    nombreProductoInventario:string;
+    nombreProductoInventario?:string;
 
-    idTipoProductoFk:TipoProducto;
+    idTipoProductoFk?:TipoProducto;
 
-    urlImagenProducto:string;
+    urlImagenProducto?:string;
+
+    porcentajeAumentoPrecio?:number;
+
+    fechaVencimiento?:Date;
 }

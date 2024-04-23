@@ -5,6 +5,7 @@ import { InventarioRespuesta } from '../interface/inventarioRespuesta.interface'
 import { Constantes } from '../shared/constanstes';
 import { RespuestaGeneral } from '../interface/respuestaGeneral.interface';
 import { InventarioInputDto } from '../interface/inventarioInputDto.interface';
+import { Inventario } from '../interface/inventario.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,13 @@ export class InventarioService {
     return this.http.post<RespuestaGeneral>(
       `${Constantes.BASE_URL}${Constantes.INVENTARIO}${Constantes.CONSULTAR_INVENTARIO_NOMBRE}`,
       input
+    )
+  }
+
+  public crearInventario(inventario:Inventario){
+    return this.http.post<RespuestaGeneral>(
+      `${Constantes.BASE_URL}${Constantes.INVENTARIO}${Constantes.CREAR_INVENTARIO}`,
+      inventario
     )
   }
 }
