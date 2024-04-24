@@ -149,6 +149,18 @@ export class CrearUsuarioComponent {
     }
   }
 
+  filtrarNumeros(event: KeyboardEvent) {
+    // Obtener el código de la tecla presionada
+    const codigoTecla = event.keyCode || event.which;
+
+    // Permitir teclas de control como 'Backspace', 'Tab', etc.
+    if (codigoTecla === 8 || (codigoTecla > 47 && codigoTecla < 58)) {
+      return; // Permitir números
+    } else {
+      event.preventDefault(); // Prevenir la entrada de otros caracteres
+    }
+  }
+
   actualizarErrorMessage() {
     // Verificar errores de campos
     if (this.email.invalid) {

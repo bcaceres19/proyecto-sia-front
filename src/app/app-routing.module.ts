@@ -10,6 +10,7 @@ import { FacturacionComponent } from './components/facturacion/facturacion.compo
 import { permisosGuard } from './permisos.guard';
 import { CrearUsuarioComponent } from './components/crear-usuario/crear-usuario.component';
 import { CrearProductoInventarioComponent } from './components/crear-producto-inventario/crear-producto-inventario.component';
+import { CrearProductoComponent } from './components/crear-producto/crear-producto.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,10 @@ const routes: Routes = [
       {
         path: 'pedido',
         component: PedidoComponent
+      },
+      {
+        path: 'registro-producto',
+        component: CrearProductoComponent
       },
       {
         path: 'facturacion',

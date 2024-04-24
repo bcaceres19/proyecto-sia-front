@@ -29,7 +29,7 @@
                         <div class="form-group">
                             <mat-form-field appearance="fill" class="w-100">
                                 <mat-label>Teléfono</mat-label>
-                                <input matInput type="text" formControlName="telefono" placeholder="Teléfono" (blur)="actualizarErrorMessage()">
+                                <input matInput type="text" formControlName="telefono" placeholder="Teléfono" (blur)="actualizarErrorMessage()" maxlength="12" (keydown)="filtrarNumeros($event)">
                                 <mat-error *ngIf="telefono.invalid">{{errorTelefono}}</mat-error>
                             </mat-form-field>
                         </div>

@@ -42,4 +42,16 @@ export class InventarioService {
       inventario
     )
   }
+
+  public verificarInventario(nombreInventario:string){
+    return this.http.get<RespuestaGeneral>(
+      `${Constantes.BASE_URL}${Constantes.INVENTARIO}${Constantes.VERIFICAR_CREACION_INVENTARIO}`,
+      {
+        params:{
+          nombreInventario:nombreInventario
+        }
+      }
+    )
+  }
+
 }

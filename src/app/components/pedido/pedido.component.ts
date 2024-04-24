@@ -3,6 +3,7 @@ import { PedidoService } from '../../service/pedido.service';
 import { RespuestaPedido } from '../../interface/respuestaPedido.interface';
 import { Pedido } from '../../interface/pedido.interface';
 import { Subscription } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-pedido',
@@ -30,21 +31,27 @@ export class PedidoComponent implements OnInit {
     })
   }
 
-  constructor(private pedidoService: PedidoService) {}
+  constructor(private pedidoService: PedidoService, private spinner:NgxSpinnerService) {}
 
   public consultarPedidos() {
+    this.spinner.show()
     this.pedidoService.servicePedidosPendientes().subscribe({
       next: (v) => {
         if (v.listaData !== undefined) {
           this.pedidosActuales = v.listaData as RespuestaPedido[];
         }
       },
-      error: (e) => console.error(e),
-      complete: () => console.log('Se completo'),
+      error: (e) => {
+        console.error(e)
+        this.spinner.hide()
+      },
+      complete: () => this.spinner.hide(),
     });
   }
 
   public aceptarPedido(codigoPedido:string){
+    console.log("Entra");
+    this.spinner.show()
     let pedido:Pedido = {
       codigoPedido:codigoPedido
     }
@@ -54,12 +61,17 @@ export class PedidoComponent implements OnInit {
           this.pedidosActuales = v.listaData as RespuestaPedido[];
         }
       },
-      error: (e) => console.error(e),
-      complete: () => console.log('Se completo'),
+      error: (e) =>{
+         console.error(e)
+          this.spinner.hide()
+        },
+      complete: () => this.spinner.hide(),
     });
   }
 
   public rechazarPedido(codigoPedido:string){
+    
+    this.spinner.show()
     let pedido:Pedido = {
       codigoPedido:codigoPedido
     }
@@ -69,8 +81,11 @@ export class PedidoComponent implements OnInit {
           this.pedidosActuales = v.listaData as RespuestaPedido[];
         }
       },
-      error: (e) => console.error(e),
-      complete: () => console.log('Se completo'),
+      error: (e) => {
+        console.error(e)
+        this.spinner.hide()
+      },
+      complete: () => this.spinner.hide(),
     });
   }
 

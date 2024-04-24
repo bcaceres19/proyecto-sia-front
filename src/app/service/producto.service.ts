@@ -33,4 +33,10 @@ export class ProductoService {
       `${Constantes.BASE_URL}${Constantes.VENTA}${Constantes.CREAR_VENTA_PRODUCTO}`,producto
     )  
   }
+
+  public crearProducto(producto:Producto){
+    return this.http.post<boolean>(
+      `${Constantes.BASE_URL}${Constantes.PRODUCTO}${Constantes.CREAR_PRODUCTO}`,producto
+    ) 
+  }
 }

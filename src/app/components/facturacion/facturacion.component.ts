@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Facturacion } from '../../interface/facturacion.interface';
 import { PedidoService } from '../../service/pedido.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { NgxSpinner, NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-facturacion',
@@ -11,7 +14,6 @@ export class FacturacionComponent implements OnInit{
 
   idUsuario!:number;
 
-  public pedidosFacturacion:Facturacion[] = [];
 
   public nombreColumnas:string[] = ['codigoPedido', 
   'cantidadElementos', 
@@ -20,26 +22,60 @@ export class FacturacionComponent implements OnInit{
   'fechaInicioPedido', 
   'acciones']
 
+  dataSource = new MatTableDataSource<Facturacion>();
+
+  dataSourceElim = new MatTableDataSource<Facturacion>();
+
+  @ViewChild('paginadorAceptadas') paginadorAceptadas:MatPaginator | undefined;
+  @ViewChild('paginadorEliminadas') paginadorEliminadas:MatPaginator | undefined;
+
   ngOnInit(): void {
     this.idUsuario = Number.parseInt(sessionStorage.getItem("id")!.toString())
-    this.consultarPedidos();
+    this.consultarPedidos("aceptada");
+    this.consultarPedidos("eliminada");
   }
 
-  constructor(private pedido:PedidoService){}
+  constructor(private pedido:PedidoService, private spinner:NgxSpinnerService){}
 
-  public consultarPedidos(){
-    this.pedido.servicePedidosFacturacion(this.idUsuario).subscribe(
+  public consultarPedidos(tipo:string){
+    this.spinner.show()
+    this.pedido.servicePedidosFacturacion(this.idUsuario, tipo).subscribe(
       {
         next:(v)=>{
           if(v.listaData !== undefined){
-            this.pedidosFacturacion = v.listaData as Facturacion[]
+            if(tipo === "aceptada"){
+              this.dataSource = new MatTableDataSource<Facturacion>(v.listaData as Facturacion[]);
+              this.dataSource.paginator = this.paginadorAceptadas!;
+            }else{
+              this.dataSourceElim = new MatTableDataSource<Facturacion>(v.listaData as Facturacion[]);
+              this.dataSourceElim.paginator = this.paginadorEliminadas!;
+            }
           }
         },
-        error:(e) => console.error(e),
-        complete:() => console.log("Se completo")
+        error:(e) => {
+          console.error(e)
+          this.spinner.hide()
+        },
+        complete:() =>  this.spinner.hide()
       }
     )
   }
+
+  public cambiarEstado(codigoPedido:string, estado:string){
+    this.spinner.show();
+    this.pedido.cambiarEstado(codigoPedido,estado).subscribe(
+      {
+        next:(v)=>{},
+        error:(e) => {
+          console.error(e)
+          this.spinner.hide()
+        },
+        complete:() =>{
+          this.consultarPedidos("aceptada")
+          this.consultarPedidos("eliminada")
+        }
+      }
+    )  }
 
   public descargar(codigoPedido:string) {
     let base64 = ""

@@ -1,7 +1,7 @@
 <div class="container mt-5">
     <div class="row justify-content-center align-items-center">
         <div class="col-md-8">
-            <h2 class="text-center mb-4">Registro de producto</h2>
+            <h2 class="text-center mb-4">Registro de inventario</h2>
 
             <form [formGroup]="formCrearInventario" (ngSubmit)="crearInventario()">
                 <div class="row">
@@ -71,7 +71,7 @@
                         <div class="form-group">
                             <mat-form-field appearance="fill" class="w-100">
                                 <mat-label>Fecha de vencimiento</mat-label>
-                                <input matInput [matDatepicker]="picker" formControlName="fechaVencimiento" placeholder="Fecha de vencimiento" (blur)="actualizarErrorMessage()">
+                                <input matInput [matDatepicker]="picker" [min]="fechaActual" formControlName="fechaVencimiento" placeholder="Fecha de vencimiento" (blur)="actualizarErrorMessage()">
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
                                 <mat-error *ngIf="fechaVencimiento.invalid">{{errorFechaVencimiento}}</mat-error>

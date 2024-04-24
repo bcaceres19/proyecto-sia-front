@@ -30,6 +30,11 @@ export class Constantes {
     public static readonly CREAR_USUARIO: string = '/crear';
     public static readonly CONSULTAR_TIPOS_PRODUCTOS: string = '/consultar-tipos-producto';
     public static readonly CREAR_INVENTARIO: string = '/crear';
+    public static readonly CONSULTAR_TIPOS_INVENTARIOS: string = '/consultar-tipos-inventarios';
+    public static readonly CONSULTAR_ESTADOS_PRODUCTOS: string = '/consultar-estados-productos';
+    public static readonly CREAR_PRODUCTO: string = '/crear';
+    public static readonly CAMBIAR_ESTADO_FACTURACION: string = '/cambiar-estado-facturacion';
+    public static readonly VERIFICAR_CREACION_INVENTARIO: string = '/verificar-creacion-inventario';
 
 
 }

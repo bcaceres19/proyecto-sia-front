@@ -7,12 +7,17 @@
       <p class="card-text fs-6" *ngIf="fechaInicio"><b>Fecha Inicio:</b> {{fechaInicio}}</p>
       <p class="card-text fs-6" *ngIf="fechaVencimiento"><b>Fecha Vencimiento:</b> {{fechaVencimiento}}</p>
       <p class="card-text fs-6" *ngIf="cantidadProductos"><b>Cantidad Comprado:</b> {{cantidadProductos}}</p>
-      <p class="card-text fs-6" *ngIf="valorTotal"><b>Valor Total:</b> {{valorTotal}}</p>
+      <p class="card-text fs-6" *ngIf="valorTotal"><b>Valor Total:</b> {{valorTotal}}$</p>
       <div class="card-body d-flex justify-content-between" *ngIf="duoBotones">
-        <button mat-flat-button color="primary" 
+        <button mat-flat-button color="primary" *ngIf="codigoProducto === null"
+        (click)="emitirAceptar()">{{textoBotonUno}}</button>
+        <button mat-flat-button color="primary" *ngIf="codigoProducto !== null"
         (click)="emitirValores()">{{textoBotonUno}}</button>
         <button mat-flat-button color="warn" 
-        (click)="emitirModal()"
+        (click)="emitirModal()" *ngIf="idObjeto !== null"
+        >{{textoBotonDos}}</button>
+        <button mat-flat-button color="warn" 
+        (click)="emitirRechazar()" *ngIf="idObjeto === null"
         >{{textoBotonDos}}</button>
       </div>
       <button mat-flat-button color="primary"  *ngIf="!duoBotones" (click)="emitirValores()">{{textoBotonUno}}</button>

@@ -149,7 +149,7 @@ export class AdministracionComponent implements OnInit{
           this.spinner.hide()
           },
         complete:() => {
-          const dialogoRef = this.matDialog.open(DialogoComponent, {
+          this.matDialog.open(DialogoComponent, {
             data:{
               nombreColumnas: [
               "codigoProducto",
@@ -164,13 +164,6 @@ export class AdministracionComponent implements OnInit{
             }
           })
           this.spinner.hide()
-          dialogoRef.afterClosed().subscribe(res => {
-            this.spinner.show()
-            for(const codigo of res){
-              this.registrarProductoVenta(codigo);
-            }
-            this.spinner.hide()
-          });
         }
       }
     )

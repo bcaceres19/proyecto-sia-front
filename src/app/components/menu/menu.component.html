@@ -9,17 +9,20 @@
         <div class="inicio">
           <a mat-button routerLink=".">Inicio</a>
         </div>
+        <div class="inicio" >
+          <a mat-button routerLink="pedido">Pedidos</a>
+        </div>
+        <div class="inicio">
+          <a mat-button routerLink="facturacion">Facturación</a>
+        </div>
         <div class="inicio" *ngIf="idRol !== '2'">
           <a mat-button routerLink="registro-usuario">Crear Usuario</a>
         </div>
         <div class="inicio" *ngIf="idRol !== '2'">
           <a mat-button routerLink="registro-inventario">Crear Inventario</a>
         </div>
-        <div class="inicio">
-          <a mat-button routerLink="pedido">Pedidos</a>
-        </div>
-        <div class="inicio">
-          <a mat-button routerLink="facturacion">Facturación</a>
+        <div class="inicio" *ngIf="idRol !== '2'">
+          <a mat-button routerLink="registro-producto">Crear Producto</a>
         </div>
         <div class="salir">
           <a mat-button (click)="onSalir()">Salir</a>

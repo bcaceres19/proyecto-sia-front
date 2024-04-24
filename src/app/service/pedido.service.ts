@@ -21,12 +21,13 @@ export class PedidoService {
     )
   }
 
-  public servicePedidosFacturacion(idUsuario:number):Observable<RespuestaGeneral>{
+  public servicePedidosFacturacion(idUsuario:number, tipoOrden:string):Observable<RespuestaGeneral>{
     return this.http.get<RespuestaGeneral>(
       `${Constantes.BASE_URL}${Constantes.PEDIDO}${Constantes.CONSULTAR_PEDIDOS_FACTURACION}`,
       {
         params: {
-          "idUsuario": idUsuario
+          "idUsuario": idUsuario,
+          "tipo": tipoOrden
         }
       }
     )
@@ -62,6 +63,19 @@ export class PedidoService {
           "codigoPedido": codigoPedio
         }
       }
+    )
+  }
+
+  public cambiarEstado(codigoPedido:string, estado:string){
+    return this.http.post<RespuestaGeneral>(
+      `${Constantes.BASE_URL}${Constantes.PEDIDO}${Constantes.CAMBIAR_ESTADO_FACTURACION}`,
+        {},
+        {
+          params:{
+            codigoPedido:codigoPedido,
+            estado: estado
+          }
+        }
     )
   }
 

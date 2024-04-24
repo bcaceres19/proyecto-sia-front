@@ -6,6 +6,7 @@ import { Inventario } from 'src/app/interface/inventario.interface';
 import { TipoProducto } from 'src/app/interface/tipoProducto.interface';
 import { InventarioService } from 'src/app/service/inventario.service';
 import { ListasService } from 'src/app/service/listas.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-crear-producto-inventario',
@@ -31,13 +32,15 @@ export class CrearProductoInventarioComponent {
 
   public tiposProductos:TipoProducto[] = []
 
+  fechaActual = new Date();
+
   formCrearInventario: FormGroup<any> = new FormGroup<any>({
-    precioProducto: new FormControl('', [Validators.required]),
-    stock: new FormControl('', [Validators.required]),
+    precioProducto: new FormControl('', [Validators.required, Validators.min(1)]),
+    stock: new FormControl('', [Validators.required, Validators.min(1)]),
     nombreProducto: new FormControl('', [Validators.required]),
     idTipoProducto: new FormControl('', [Validators.required]),
     urlImagen: new FormControl('', [Validators.required]),
-    porcentajeAumento: new FormControl('', [Validators.required]),
+    porcentajeAumento: new FormControl('', [Validators.required, Validators.min(1)]),
     fechaVencimiento: new FormControl('', [Validators.required])
   });
 
@@ -45,7 +48,27 @@ export class CrearProductoInventarioComponent {
     private service:ListasService, private inventarioService:InventarioService
   ){
     this.idRol = sessionStorage.getItem('rol');
+    this.fechaActual.setHours(0, 0, 0, 0);
     this.consultarListas()
+    this.precioProducto.valueChanges.subscribe(value => {
+      if (value < 0) {
+        this.precioProducto.setValue(0);
+      }
+    });
+    this.stock.valueChanges.subscribe(value => {
+      if (value < 0) {
+        this.stock.setValue(0);
+      }else if (value >= 100){
+        this.stock.setValue(99)
+      }
+    });
+    this.porcentajeAumento.valueChanges.subscribe(value => {
+      if (value < 0) {
+        this.porcentajeAumento.setValue(0);
+      }else if (value >= 100){
+        this.porcentajeAumento.setValue(99)
+      }
+    });
   }
 
   get precioProducto() {
@@ -95,51 +118,88 @@ export class CrearProductoInventarioComponent {
 
   actualizarErrorMessage() {
     this.errorPrecioProducto = this.precioProducto.hasError('required')
-      ? 'Se requiere un precio para el producto'
-      : '';
-    this.errorStock = this.stock.hasError('required')
-      ? 'Se requiere un número de stock para el producto'
-      : '';
-    this.errorNombreProducto = this.nombreProducto.hasError('required')
-      ? 'Se requiere un nombre para el producto'
-      : '';
-    this.errorTipoProducto = this.idTipoProducto.hasError('required')
-      ? 'Se requiere definir el tipo del producto'
-      : '';
-    this.errorUrlImagen = this.urlImagen.hasError('required')
-      ? 'Se requiere una imagen para el producto'
-      : '';
-    this.errorFechaVencimiento = this.fechaVencimiento.hasError('required') ?  'Se requiere una fecha para el vencimiento del producto' : ''
+    ? 'Se requiere un precio para el producto'
+    : this.precioProducto.hasError('min')
+        ? 'El precio debe ser mayor a 0'
+        : '';
+
+this.errorPorcentaje = this.porcentajeAumento.hasError('min')
+    ? 'El porcentaje debe ser mayor a 0'
+    : '';
+
+this.errorStock = this.stock.hasError('required')
+    ? 'Se requiere un número de stock para el producto'
+    : this.stock.hasError('min')
+        ? 'El stock debe ser mayor a 0'
+        : '';
+
+this.errorNombreProducto = this.nombreProducto.hasError('required')
+    ? 'Se requiere un nombre para el producto'
+    : '';
+
+this.errorTipoProducto = this.idTipoProducto.hasError('required')
+    ? 'Se requiere definir el tipo del producto'
+    : '';
+
+this.errorUrlImagen = this.urlImagen.hasError('required')
+    ? 'Se requiere una imagen para el producto'
+    : '';
+
+this.errorFechaVencimiento = this.fechaVencimiento.hasError('required')
+    ? 'Se requiere una fecha para el vencimiento del producto'
+    : '';
   }
 
   crearInventario() {
-    let tipoProducto:TipoProducto = {
-      idTipoProducto: this.idTipoProducto.value
+    this.inventarioService.verificarInventario(this.nombreProducto.value).subscribe({
+      next: (v) => {
+        if(v.data as boolean){
+          Swal.fire({
+            text: "Ya existe un inventario con este nombre. Por favor, ingresa otro nombre.",
+            icon: "error"
+          });
+          
+        }else{
+          let tipoProducto:TipoProducto = {
+            idTipoProducto: this.idTipoProducto.value
+          }
+          let inventario: Inventario = {
+            precioProductoInventario: this.precioProducto.value,
+            stockProductoInventario: this.stock.value,
+            nombreProductoInventario: this.nombreProducto.value,
+            urlImagenProducto: this.urlImagen.value,
+            idTipoProductoFk: tipoProducto,
+            porcentajeAumentoPrecio: this.porcentajeAumento.value,
+            fechaVencimiento: this.fechaVencimiento.value
+          };
+          this.spinner.show();
+          // Verificar si las contraseñas coinciden
+          
+          this.inventarioService.crearInventario(inventario).subscribe({
+              next: (v) => {},
+              error: (e) => {
+                this.spinner.hide();
+                console.log(e);
+              },
+              complete: () => {
+                this.spinner.hide();
+                this.router.navigate(['administrador/']);
+              },
+            });
+        }
+      },
+      error: (e) => {
+        this.spinner.hide();
+        console.log(e);
+      }
+    })    
+  }
+
+  validarNumero(event:any){
+    const input = event.target;
+    if (input.value < 0) {
+        input.value = '';
     }
-    let inventario: Inventario = {
-      precioProductoInventario: this.precioProducto.value,
-      stockProductoInventario: this.stock.value,
-      nombreProductoInventario: this.nombreProducto.value,
-      urlImagenProducto: this.urlImagen.value,
-      idTipoProductoFk: tipoProducto,
-      porcentajeAumentoPrecio: this.porcentajeAumento.value,
-      fechaVencimiento: this.fechaVencimiento.value
-    };
-    this.spinner.show();
-    // Verificar si las contraseñas coinciden
-    
-    this.inventarioService.crearInventario(inventario).subscribe({
-        next: (v) => {},
-        error: (e) => {
-          this.spinner.hide();
-          console.log(e);
-        },
-        complete: () => {
-          this.spinner.hide();
-          this.router.navigate(['administrador/']);
-        },
-      });
-    
   }
 
   volver(){

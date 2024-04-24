@@ -26,7 +26,7 @@
             <ng-container matColumnDef="acciones">
                 <th mat-header-cell *matHeaderCellDef class="text-center"> Acciones </th>
                 <td mat-cell *matCellDef="let element" class="text-center">
-                  <button mat-raised-button color="primary" (click)="addCodigoProductos(element.codigoProducto?.toString())">Añadir</button>
+                  <button mat-raised-button color="primary" (click)="registrarProductoVenta(element.codigoProducto?.toString())">Añadir</button>
                 </td>
               </ng-container>
             <tr mat-header-row *matHeaderRowDef="data.nombreColumnas"></tr>
@@ -34,7 +34,7 @@
         </table>
         </div>
         <div mat-dialog-actions class="d-flex justify-content-center">
-            <button mat-flat-button color="warn"  [mat-dialog-close]="codigoProductos">Cerrar</button>
+            <button mat-flat-button color="warn"  [mat-dialog-close]="true">Cerrar</button>
         </div>
     </div>
 </div>

@@ -23,7 +23,7 @@ export class VistaTarjetaComponent {
   public fechaVencimiento?:string;
 
   @Input()
-  public urlImagen?:string;
+  public urlImagen?:string|null;
 
   @Input()
   public titulo?:string;
@@ -47,34 +47,32 @@ export class VistaTarjetaComponent {
   public duoBotones?:boolean;
 
   @Input()
-  public tipoEnvio?:string;
-
-  @Input()
-  public codigoProducto?:string;
+  public codigoProducto?:string | null;
 
   @Input()
   public nombreModal?:string;
 
   @Input()
-  public idObjeto?:number;
+  public idObjeto?:number | null;
 
   @Output() itemNuevo = new EventEmitter<string>();
   emitirValores(){
-    let valor:string |undefined = "";
-    switch(this.tipoEnvio){
-      case "codigoProducto":
-        valor = this.codigoProducto;
-        break;
-      case "nombreProducto":
-        valor = this.titulo;
-        break;
-    }
-    this.itemNuevo.emit(valor);
+    this.itemNuevo.emit(this.codigoProducto!);
+  } 
+
+  @Output() itemAceptar = new EventEmitter<string>();
+  emitirAceptar(){
+    this.itemAceptar.emit(this.titulo);
+  } 
+
+  @Output() itemRechazar = new EventEmitter<string>();
+  emitirRechazar(){
+    this.itemRechazar.emit(this.titulo);
   } 
 
   @Output() itemModal = new EventEmitter<number>();
   emitirModal(){
-    this.itemModal.emit(this.idObjeto);
+    this.itemModal.emit(this.idObjeto!);
   }
 
 }

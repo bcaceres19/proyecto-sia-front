@@ -1,1 +1,75 @@
-<p>crear-producto works!</p>
+<div class="container mt-5">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-8">
+            <h2 class="text-center mb-4">Registro de producto</h2>
+
+            <form [formGroup]="formCrearProducto" (ngSubmit)="crearProducto()">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Precio del producto</mat-label>
+                                <input matInput type="number" formControlName="precioProducto" placeholder="Precio del producto" (blur)="actualizarErrorMessage()">
+                                <mat-error *ngIf="precioProducto.invalid">{{errorPrecioProducto}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Estado del producto</mat-label>
+                                <mat-select formControlName="estadoProducto">
+                                    <mat-option *ngFor="let estado of estadosProducto" [value]="estado">{{estado}}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="estadoProducto.invalid">{{errorEstadoProducto}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Tipo de producto</mat-label>
+                                <mat-select formControlName="tipoProducto">
+                                    <mat-option *ngFor="let tipo of tiposProducto" [value]="tipo.idInventario">{{tipo.nombreProducto}}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="tipoProducto.invalid">{{errorTipoProducto}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Fecha de vencimiento</mat-label>
+                                <input matInput [matDatepicker]="picker" [min]="fechaActual" formControlName="fechaVencimientoProducto" placeholder="Fecha de vencimiento" (blur)="actualizarErrorMessage()">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                                <mat-error *ngIf="fechaVencimientoProducto.invalid">{{errorFechaVencimiento}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Cantidad</mat-label>
+                                <input matInput type="number"  formControlName="cantidad" placeholder="Cantidad" (blur)="actualizarErrorMessage()">
+                                <mat-error *ngIf="cantidad.invalid">{{errorCantidad}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center mt-4">
+                    <div class="col-md-2 text-center">
+                        <button mat-raised-button type="submit" class="btn btn-primary" [disabled]="formCrearProducto.invalid">Registrar</button>
+                    </div>
+                    <div class="col-md-2 text-center">
+                        <button mat-raised-button type="button" class="btn btn-secondary" (click)="volver()">Volver</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

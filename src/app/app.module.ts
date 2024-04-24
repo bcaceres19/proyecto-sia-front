@@ -35,6 +35,8 @@ import { CrearProductoComponent } from './components/crear-producto/crear-produc
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -76,8 +78,10 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     NgxSpinnerModule,
     BrowserAnimationsModule,
     MatDatepickerModule,
-    MatNativeDateModule
-  ],
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatTabsModule
+    ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' }
   ],
