@@ -24,7 +24,7 @@ const routes: Routes = [
   {
     path:'administrador',
     component: MenuComponent,
-   // canActivate: [permisosGuard],
+   canActivate: [permisosGuard],
     children: [
       {
         path: '',
